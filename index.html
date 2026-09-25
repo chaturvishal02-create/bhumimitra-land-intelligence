@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BhumiMitra — National Land Intelligence &amp; Policy Simulation Platform (Demo)</title>
+<meta name="description" content="BhumiMitra demo platform: Digital Land Twin, GIS Explorer, Policy Impact Sandbox, Dispute Early Warning Radar, Research Hub and Ask BhumiMitra AI — trilingual (English / मराठी / हिन्दी), running on clearly-labeled simulated demo data. SIH 2026 · PS 26019 · DILRMP 3.0." />
+<link rel="stylesheet" href="vendor/leaflet.css" />
+<link rel="stylesheet" href="app.css" />
+</head>
+<body>
+
+<!-- ================= DEMO GATE ================= -->
+<div id="demo-gate" class="demo-gate" hidden>
+  <div class="gate-card">
+    <span class="brand-mark gate-mark" aria-hidden="true">भ</span>
+    <h1>BhumiMitra</h1>
+    <p class="gate-sub" data-i18n="gate.sub">National Land Intelligence &amp; Policy Simulation Platform</p>
+    <span class="demo-flag" data-i18n="pill.demo">DEMO MODE • Simulated Data</span>
+    <button id="gate-continue" class="btn btn-primary btn-lg" data-i18n="gate.cta">Continue as Demo User</button>
+    <p class="fineprint gate-note"><span data-i18n="gate.note1">No account, email, password or external sign-in required.</span><br /><span data-i18n="gate.note2">All parcels, cases, statistics and projections are simulated demonstration data.</span></p>
+    <p class="gate-links"><a href="proposal.html" data-i18n="gate.link">View the full SIH proposal document ↗</a></p>
+  </div>
+</div>
+
+<div id="app-shell" hidden>
+
+<!-- ================= HEADER ================= -->
+<header class="appbar">
+  <div class="appbar-top">
+    <a class="brand" href="#" id="brand-home" aria-label="BhumiMitra home">
+      <span class="brand-mark" aria-hidden="true">भ</span>
+      <span class="brand-text">
+        <strong>BhumiMitra</strong>
+        <small data-i18n="brand.sub">National Land Intelligence &amp; Policy Platform</small>
+      </span>
+      <span class="badge-ready">DILRMP 3.0 Ready</span>
+    </a>
+
+    <div class="macro-pills" aria-label="Live national macro metrics (demo)">
+      <span class="pill demo-pill"><i class="dot dot-ochre"></i><span data-i18n="pill.demo">DEMO MODE • Simulated Data</span></span>
+      <span class="pill"><i class="dot dot-green"></i><span data-i18n="pill.ror">Digitized RoRs</span> <b>99.81%</b></span>
+      <span class="pill"><i class="dot dot-ochre"></i><span data-i18n="pill.ulpin">ULPINs</span> <b>40.58+ Cr</b></span>
+      <span class="pill"><i class="dot dot-navy"></i><span data-i18n="pill.rccms">RCCMS Courts</span> <b>94.1%</b></span>
+    </div>
+
+    <div class="appbar-actions">
+      <div class="lang-wrap">
+        <button id="lang-btn" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">🌐 <span id="lang-label">English</span> <span aria-hidden="true">▾</span></button>
+        <div id="lang-menu" class="profile-menu lang-menu" role="menu" hidden>
+          <button role="menuitem" data-lang="en">English</button>
+          <button role="menuitem" data-lang="mr">मराठी</button>
+          <button role="menuitem" data-lang="hi">हिन्दी</button>
+        </div>
+      </div>
+
+      <label class="role-switch">
+        <span class="sr-only">Operational view</span>
+        <select id="role-select" aria-label="Switch operational role view">
+          <option value="researcher" data-i18n="role.researcher">Policy Researcher</option>
+          <option value="collector" data-i18n="role.collector">District Collector</option>
+          <option value="lro" data-i18n="role.lro">Land Records Officer</option>
+        </select>
+      </label>
+
+      <div class="profile-wrap">
+        <button id="profile-btn" class="profile-btn" aria-haspopup="true" aria-expanded="false">
+          <span class="avatar" aria-hidden="true">DU</span> <span data-i18n="profile.btn">Demo User</span> <span aria-hidden="true">▾</span>
+        </button>
+        <div id="profile-menu" class="profile-menu" role="menu" hidden>
+          <div class="pm-head">
+            <strong data-i18n="profile.btn">Demo User</strong>
+            <span data-i18n="profile.role">Government Researcher</span>
+            <span data-i18n="profile.org">BhumiMitra Research Lab</span>
+            <span class="risk-badge risk-low" data-i18n="profile.status">Demo Account</span>
+          </div>
+          <button role="menuitem" data-act="profile" data-i18n="profile.menu.profile">Profile</button>
+          <button role="menuitem" data-act="reset" data-i18n="profile.menu.reset">Reset Demo</button>
+          <button role="menuitem" data-act="logout" data-i18n="profile.menu.logout">Logout</button>
+        </div>
+      </div>
+
+      <a class="link-quiet" href="proposal.html">Proposal&nbsp;Doc ↗</a>
+      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="mainnav">☰ <span class="sr-only">Menu</span></button>
+    </div>
+  </div>
+
+  <nav id="mainnav" class="mainnav" aria-label="Main tabs">
+    <button class="navtab active" data-tab="dashboard" aria-selected="true" data-i18n="nav.dashboard">Dashboard</button>
+    <button class="navtab" data-tab="gis" aria-selected="false" data-i18n="nav.gis">GIS Explorer</button>
+    <button class="navtab" data-tab="policylab" aria-selected="false" data-i18n="nav.policylab">Policy Lab</button>
+    <button class="navtab" data-tab="twin" aria-selected="false" data-i18n="nav.twin">Digital Land Twin</button>
+    <button class="navtab" data-tab="radar" aria-selected="false" data-i18n="nav.radar">Dispute Radar</button>
+    <button class="navtab" data-tab="research" aria-selected="false" data-i18n="nav.research">Research Hub</button>
+    <button class="navtab" data-tab="rag" aria-selected="false" data-i18n="nav.rag">Ask BhumiMitra AI</button>
+    <button class="navtab" data-tab="reports" aria-selected="false" data-i18n="nav.reports">Reports</button>
+  </nav>
+</header>
+
+<div class="role-banner" id="role-banner" hidden></div>
+
+<main>
+
+<!-- ================= TAB · DASHBOARD ================= -->
+<section id="tab-dashboard" class="tabpanel active" aria-label="National Dashboard">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="dash.title">National Land Intelligence Dashboard</h1>
+        <p class="subtitle" data-i18n="dash.subtitle">Federated view across five demo states — land use, climate risk, urban expansion, disputes and infrastructure.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.demoPlatform">Demo Platform Data</span>
+    </div>
+
+    <div class="metrics-strip" id="metrics-strip" aria-label="Platform intelligence metrics"></div>
+
+    <div class="card map-card">
+      <div class="map-controls">
+        <div class="ctl">
+          <label for="map-search" data-i18n="map.search">Search location</label>
+          <input id="map-search" type="search" placeholder="e.g. Pune, Warangal, Maharashtra" autocomplete="off" data-i18n-ph="map.searchPh" />
+        </div>
+        <div class="ctl">
+          <label for="state-select" data-i18n="map.state">State</label>
+          <select id="state-select">
+            <option value="ALL" data-i18n="map.allStates">All demo states</option>
+            <option value="MH">Maharashtra</option>
+            <option value="KA">Karnataka</option>
+            <option value="GJ">Gujarat</option>
+            <option value="TG">Telangana</option>
+            <option value="MP">Madhya Pradesh</option>
+          </select>
+        </div>
+        <div class="ctl">
+          <label for="layer-select" data-i18n="map.layer">Layer</label>
+          <select id="layer-select">
+            <option value="landuse" data-i18n="layer.landuse">Land Use (Agri %)</option>
+            <option value="climate" data-i18n="layer.climate">Climate Risk Composite</option>
+            <option value="urban" data-i18n="layer.urban">Urban Expansion</option>
+            <option value="disputes" data-i18n="layer.disputes">Dispute Density</option>
+            <option value="infra" data-i18n="layer.infra">Infrastructure Index</option>
+          </select>
+        </div>
+        <div class="ctl ctl-buttons">
+          <button class="btn btn-ghost" id="map-reset" data-i18n="map.reset">Reset</button>
+          <button class="btn btn-ghost" id="map-compare" data-i18n="map.compare">Compare MH vs KA</button>
+          <button class="btn btn-primary" id="goto-gis" data-i18n="map.openGis">Open GIS Explorer →</button>
+        </div>
+      </div>
+      <div class="map-body">
+        <div id="national-map" class="map" role="application" aria-label="Interactive national intelligence map"></div>
+        <div class="map-side">
+          <div class="legend" id="map-legend" aria-label="Map legend"></div>
+          <div class="compare-box" id="compare-box" hidden>
+            <h3 data-i18n="compare.title">Region Comparison — Maharashtra vs Karnataka</h3>
+            <table class="mini-table">
+              <thead><tr><th data-i18n="preset.region">Region</th><th>Maharashtra</th><th>Karnataka</th></tr></thead>
+              <tbody id="compare-body"></tbody>
+            </table>
+          </div>
+          <p class="fineprint" data-i18n="map.fineprint">Schematic demo boundaries — not official Survey of India geometry. Tile data © OpenStreetMap contributors.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head"><h2><span data-i18n="lu.title">Land Use Analytics —</span> <span id="lu-state-name">Maharashtra</span></h2><span class="demo-flag small" data-i18n="flag.demoPlatform">Demo Platform Data</span></div>
+        <p class="card-sub" data-i18n="lu.sub">Share of geographic area (%), 2015 → 2025. Urban growth vs agricultural contraction is the key policy signal.</p>
+        <div class="chart-box"><canvas id="landuse-chart" aria-label="Land use change chart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2><span data-i18n="cl.title">Climate-Land Intelligence —</span> <span id="cl-state-name">Maharashtra</span></h2><span class="demo-flag small" data-i18n="flag.demoPlatform">Demo Platform Data</span></div>
+        <p class="card-sub" data-i18n="cl.sub">Parcel-weighted risk exposure indices (0–100).</p>
+        <div class="risk-list" id="climate-risks"></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head"><h2><span data-i18n="rs.title">Research Highlights —</span> <span id="rs-state-name">Maharashtra</span></h2><span class="demo-flag small" data-i18n="flag.demoDataset">Demo Dataset</span></div>
+        <ul class="prose-list" id="state-research"></ul>
+        <button class="btn btn-ghost" id="goto-research" data-i18n="dash.gotoResearch">Open Research Hub →</button>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2><span data-i18n="pl.title">Policy Information —</span> <span id="pl-state-name">Maharashtra</span></h2><span class="demo-flag small" data-i18n="flag.simulated">Simulated</span></div>
+        <p class="policy-note" id="state-policy"></p>
+        <button class="btn btn-ghost" id="goto-policylab" data-i18n="dash.gotoPolicy">Open Policy Lab →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB · GIS EXPLORER ================= -->
+<section id="tab-gis" class="tabpanel" aria-label="GIS Explorer" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="gis.title">GIS Explorer</h1>
+        <p class="subtitle" data-i18n="gis.subtitle">Drill down State → District → Demo Region. Toggle land-use, climate, urban-growth, dispute and infrastructure overlays on a live interactive map.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.demoGeo">Demo GeoJSON · Simulated layers</span>
+    </div>
+
+    <div class="card">
+      <div class="gis-controls">
+        <div class="ctl"><label for="gis-state" data-i18n="gis.state">State</label><select id="gis-state"></select></div>
+        <div class="ctl"><label for="gis-district" data-i18n="gis.district">District</label><select id="gis-district"></select></div>
+        <div class="ctl"><label for="gis-region" data-i18n="gis.region">Demo Region</label><select id="gis-region"></select></div>
+        <div class="ctl ctl-buttons"><button class="btn btn-ghost" id="gis-reset" data-i18n="gis.reset">Reset View</button></div>
+      </div>
+
+      <div class="gis-body">
+        <div id="gis-map" class="map" role="application" aria-label="GIS Explorer interactive map"></div>
+        <div class="map-side">
+          <div class="layer-panel" aria-label="Layer toggles">
+            <h4 data-i18n="gis.layers">Layers</h4>
+            <label class="layer-toggle"><input type="checkbox" id="lyr-landuse" checked /> <span data-i18n="lyr.landuse">Land Use</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="lyr-climate" /> <span data-i18n="lyr.climate">Climate Risk</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="lyr-urban" /> <span data-i18n="lyr.urban">Urban Growth</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="lyr-disputes" /> <span data-i18n="lyr.disputes">Dispute Hotspots</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="lyr-infra" /> <span data-i18n="lyr.infra">Infrastructure</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="lyr-water" /> <span data-i18n="lyr.water">Water Bodies</span></label>
+          </div>
+          <div class="legend" id="gis-legend"></div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px">
+        <div class="region-info" id="gis-region-info">
+          <h3 data-i18n="gis.infoTitle">Region Land-Use Information</h3>
+          <p class="fineprint" data-i18n="gis.infoHint">Select a demo region to view its land-use, climate-risk and dispute profile.</p>
+        </div>
+        <div class="region-info" id="gis-climate-info">
+          <h3 data-i18n="gis.climateTitle">Climate Risk Profile</h3>
+          <p class="fineprint" data-i18n="gis.climateHint">Driven by the selected region's demo water-stress and heat indices.</p>
+        </div>
+      </div>
+      <p class="fineprint" data-i18n="gis.fineprint">All layer values are simulated demo data rendered over OpenStreetMap base tiles. Boundaries are schematic.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB · POLICY LAB ================= -->
+<section id="tab-policylab" class="tabpanel" aria-label="Policy Lab" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="policy.title">Policy Lab</h1>
+        <p class="subtitle" data-i18n="policy.subtitle">Policy Impact Sandbox and Counterfactual Simulator — test legislative and fiscal reforms before gazette notification.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.simResult">Simulated Demo Results</span>
+    </div>
+
+    <div class="card sandbox-card">
+      <div class="card-head">
+        <h2 data-i18n="sb.title">Policy Impact Sandbox</h2>
+        <span class="demo-flag small" data-i18n="flag.simResult">Simulated Demo Result</span>
+      </div>
+      <p class="card-sub" data-i18n="sb.sub">Example scenario: “Convert 500 hectares of agricultural land into an industrial development zone in Pune over 5 years.”</p>
+
+      <form id="sandbox-form" class="sandbox-form" novalidate>
+        <div class="ctl">
+          <label for="sb-region" data-i18n="sb.region">Region</label>
+          <select id="sb-region">
+            <option value="MH">Maharashtra — Pune</option>
+            <option value="KA">Karnataka — Bengaluru</option>
+            <option value="GJ">Gujarat — Dholera</option>
+            <option value="TG">Telangana — Warangal</option>
+            <option value="MP">Madhya Pradesh — Bhopal</option>
+          </select>
+        </div>
+        <div class="ctl">
+          <label for="sb-change" data-i18n="sb.change">Land-use change</label>
+          <select id="sb-change">
+            <option value="agri-industrial" data-i18n="ch.industrial">Agricultural → Industrial zone</option>
+            <option value="agri-urban" data-i18n="ch.urban">Agricultural → Residential/Urban</option>
+            <option value="agri-solar" data-i18n="ch.solar">Agricultural → Solar park</option>
+            <option value="forest-eco" data-i18n="ch.eco">Degraded → Afforestation/Eco zone</option>
+            <option value="agri-protect" data-i18n="ch.protect">Agricultural protection / conservation</option>
+          </select>
+        </div>
+        <div class="ctl">
+          <label for="sb-area" data-i18n="sb.area">Area (hectares)</label>
+          <input id="sb-area" type="number" min="10" max="100000" step="10" value="500" />
+        </div>
+        <div class="ctl">
+          <label for="sb-policy" data-i18n="sb.policy">Policy type</label>
+          <select id="sb-policy">
+            <option value="conversion" data-i18n="pt.conversion">Direct conversion (CLU order)</option>
+            <option value="pooling" data-i18n="pt.pooling">Land pooling scheme</option>
+            <option value="lease" data-i18n="pt.lease">Long-term lease model</option>
+            <option value="acquisition" data-i18n="pt.acquisition">Acquisition &amp; rehabilitation</option>
+          </select>
+        </div>
+        <div class="ctl">
+          <label for="sb-horizon" data-i18n="sb.horizon">Time horizon</label>
+          <select id="sb-horizon">
+            <option value="5" data-i18n="h.5">5 years</option>
+            <option value="10" selected data-i18n="h.10">10 years</option>
+            <option value="15" data-i18n="h.15">15 years</option>
+          </select>
+        </div>
+        <div class="ctl ctl-buttons">
+          <button type="submit" class="btn btn-primary" id="sb-run" data-i18n="sb.run">Run Simulation</button>
+        </div>
+      </form>
+      <p id="sandbox-error" class="form-error" role="alert" hidden></p>
+
+      <div class="thinking" id="sandbox-loading" hidden><span class="spinner" aria-hidden="true"></span> <span data-i18n="sb.loading">Running land impact simulation…</span></div>
+
+      <div id="sandbox-result" hidden>
+        <h3 class="flow-title" data-i18n="sb.flowTitle">CURRENT STATE → POLICY SCENARIO → PROJECTED IMPACT</h3>
+        <div class="flow-strip" id="sandbox-flow"></div>
+        <div class="impact-grid" id="sandbox-impacts"></div>
+        <div class="scenario-compare" id="scenario-compare" hidden>
+          <h3 data-i18n="cmp.title">Scenario A vs Scenario B</h3>
+          <table class="mini-table">
+            <thead><tr><th data-i18n="preset.region">Region</th><th id="sa-head">Scenario A</th><th id="sb-head">Scenario B</th></tr></thead>
+            <tbody id="scenario-body"></tbody>
+          </table>
+          <p class="fineprint" id="scenario-note"></p>
+        </div>
+      </div>
+
+      <div class="sandbox-actions">
+        <button class="btn btn-ghost" id="compare-scenarios-btn" data-i18n="cmp.btn">Compare Scenarios (Industrial vs Agricultural Protection)</button>
+      </div>
+      <div id="preset-compare" hidden>
+        <h3 class="flow-title" data-i18n="preset.title">PRESET COMPARISON — SIMULATED DEMO RESULT</h3>
+        <div class="grid-2">
+          <div class="scenario-card" id="preset-a"></div>
+          <div class="scenario-card" id="preset-b"></div>
+        </div>
+        <div class="table-scroll" style="margin-top:12px">
+          <table class="mini-table preset-table">
+            <thead><tr><th data-i18n="preset.region">Region</th><th data-i18n="preset.a">Scenario A — Industrial Development</th><th data-i18n="preset.b">Scenario B — Agricultural Protection</th></tr></thead>
+            <tbody id="preset-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-sim">
+      <div class="card sim-controls">
+        <h2 data-i18n="sim.title">Policy Counterfactual Simulator</h2>
+        <p class="card-sub" data-i18n="sim.sub">Agent-based levers calibrated on demo transaction distributions.</p>
+
+        <div class="lever">
+          <div class="lever-head"><label for="sl-ceiling" data-i18n="lev.ceiling">Statutory Land Ceiling Adjustment</label><output id="out-ceiling">0%</output></div>
+          <input type="range" id="sl-ceiling" min="-40" max="40" step="5" value="0" />
+          <p class="lever-hint" data-i18n="levh.ceiling">Negative = tighter ceilings (more redistribution pressure); positive = relaxed ceilings.</p>
+        </div>
+
+        <div class="lever">
+          <div class="lever-head"><label for="sl-stamp" data-i18n="lev.stamp">Registration Stamp Duty Rate</label><output id="out-stamp">6.0%</output></div>
+          <input type="range" id="sl-stamp" min="1" max="9" step="0.5" value="6" />
+          <p class="lever-hint" data-i18n="levh.stamp">Current band in most states: 5–7%. Cuts drive formalization; very low rates invite speculation.</p>
+        </div>
+
+        <div class="lever">
+          <div class="lever-head"><label for="sl-tenancy" data-i18n="lev.tenancy">Tenancy Rights Security Index</label><output id="out-tenancy">50</output></div>
+          <input type="range" id="sl-tenancy" min="20" max="100" step="5" value="50" />
+          <p class="lever-hint" data-i18n="levh.tenancy">20 = informal/concealed tenancy; 100 = model tenancy law with full rental-authority coverage.</p>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="sim-recalc" data-i18n="sim.recalc">Recalculate Scenario</button>
+        <div class="verdict-card" id="sim-verdict" aria-live="polite"></div>
+      </div>
+
+      <div class="sim-right">
+        <div class="card">
+          <div class="card-head"><h2 data-i18n="sim.chartTitle">10-Year Projections (2026 → 2036)</h2><span class="demo-flag small" data-i18n="flag.demoCalib">Demo calibration</span></div>
+          <div class="chart-box tall"><canvas id="sim-chart" aria-label="Ten year policy projection chart"></canvas></div>
+          <p class="fineprint" data-i18n="sim.chartNote">Indices baseline = 100 at 2026 policy settings (ceiling 0%, duty 6%, tenancy 50). Credit axis in ₹ Crores (right).</p>
+        </div>
+        <div class="card guardrails">
+          <div class="card-head"><h2 data-i18n="gr.title">Policy Guardrails — Automated Recommendations</h2></div>
+          <ul id="sim-guardrails"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB · DIGITAL LAND TWIN ================= -->
+<section id="tab-twin" class="tabpanel" aria-label="Digital Land Twin and Parcel Biography" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="twin.title">Digital Land Twin &amp; Parcel Biography</h1>
+        <p class="subtitle" data-i18n="twin.subtitle">Region-level twin (PAST → PRESENT → FUTURE) and parcel-level biographies with interactive cadastral maps.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.demoParcel">Demo parcels · Simulated records</span>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2 data-i18n="twin.regionTitle">Region Twin — PAST → PRESENT → FUTURE</h2><span class="demo-flag small" data-i18n="flag.simulated">Simulated</span></div>
+      <div class="gis-controls">
+        <div class="ctl"><label for="twin-state" data-i18n="twin.state">State</label><select id="twin-state"></select></div>
+        <div class="ctl"><label for="twin-district" data-i18n="twin.district">District</label><select id="twin-district"></select></div>
+        <div class="ctl"><label for="twin-region" data-i18n="twin.region">Demo Region</label><select id="twin-region"></select></div>
+      </div>
+      <div class="twin-ppf" id="twin-ppf"></div>
+      <p class="fineprint" id="twin-ppf-note"></p>
+    </div>
+
+    <div class="card">
+      <div class="twin-search">
+        <label for="parcel-search" class="sr-only">Search parcels</label>
+        <input id="parcel-search" type="search" placeholder="Search by 14-digit Bhu-Aadhaar (ULPIN), Survey Number, Village or Parcel Code…" autocomplete="off" data-i18n-ph="twin.searchPh" />
+        <button class="btn btn-primary" id="parcel-search-btn" data-i18n="twin.open">Open Twin</button>
+      </div>
+      <div class="quick-row" id="quick-parcels" aria-label="Quick select demo parcels"></div>
+      <p id="parcel-error" class="form-error" role="alert" hidden></p>
+    </div>
+
+    <div id="twin-empty" class="card empty-state">
+      <p data-i18n="twin.empty">Select a demo parcel above to open its Territorial Digital Twin — map, health card, biography and interactive life timeline.</p>
+    </div>
+
+    <div id="twin-detail" hidden>
+      <div class="grid-twin">
+        <div class="card">
+          <div class="card-head"><h2 data-i18n="twin.cadastral">Cadastral View</h2><span class="status-badge" id="parcel-status"></span></div>
+          <div id="parcel-map" class="map map-parcel" role="application" aria-label="Parcel cadastral map"></div>
+          <p class="fineprint"><span class="risk-badge risk-low" data-i18n="flag.demoParcel">Demo Parcel</span> · <span data-i18n="twin.swatchNote">Boundary: litigated · clean · watch. Demo geometry, not a government record.</span></p>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2 data-i18n="twin.health">Parcel Health Card</h2><span class="demo-flag small" data-i18n="flag.demoParcel">Demo Parcel</span></div>
+          <div class="twin-head-block">
+            <p class="twin-ulpin" id="t-ulpin"></p>
+            <p class="twin-geo" id="t-geo"></p>
+          </div>
+          <div class="metric-grid" id="t-metrics"></div>
+          <p class="zoning-tag" id="t-zoning"></p>
+          <div class="biography-box">
+            <h3><span class="ai-chip">AI</span> <span data-i18n="twin.bioTitle">Parcel Biography</span></h3>
+            <p id="t-bio"></p>
+          </div>
+          <div class="role-extra" id="t-role-extra" hidden></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2 data-i18n="twin.timelineTitle">Chronological Life Timeline</h2><span class="demo-flag small" data-i18n="flag.clickExpand">Click events to expand</span></div>
+        <ol class="life-timeline" id="t-timeline"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB · DISPUTE RADAR ================= -->
+<section id="tab-radar" class="tabpanel" aria-label="Dispute Early Warning Radar" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="radar.title">Dispute Early Warning Radar</h1>
+        <p class="subtitle" data-i18n="radar.subtitle">Predictive 6–12 month dispute forecasting (RCCMS analytics) — fusing unmutated-inheritance backlogs, boundary resurvey mismatches and fragmentation depth into taluk-level flashpoint risk.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.demoRccms">Demo RCCMS analytics</span>
+    </div>
+
+    <div class="radar-summary" id="radar-summary"></div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2 data-i18n="radar.register">Taluk Risk Register</h2>
+        <div class="radar-actions">
+          <button class="btn btn-ghost" id="radar-filter-high" data-i18n="radar.filterHigh">Show high-flashpoint only</button>
+          <button class="btn btn-primary" id="radar-export" hidden>Export Intervention Plan (CSV)</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" id="radar-table">
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="rth.taluk">Taluk / District</th>
+              <th scope="col" data-i18n="rth.risk">Risk Category</th>
+              <th scope="col" class="num" data-i18n="rth.parcels">Total Parcels</th>
+              <th scope="col" class="num" data-i18n="rth.cases">Pending RCCMS Cases</th>
+              <th scope="col" data-i18n="rth.pendency">Avg. Pendency</th>
+              <th scope="col" data-i18n="rth.driver">Primary Conflict Driver</th>
+              <th scope="col" data-i18n="rth.intervention">Proactive Intervention</th>
+            </tr>
+          </thead>
+          <tbody id="radar-body"></tbody>
+        </table>
+      </div>
+      <p class="fineprint" data-i18n="radar.fineprint">Anonymized demo records — no real personal or case information. Pendency and case counts are simulated.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head"><h2 data-i18n="radar.mixTitle">Dispute Category Mix</h2><span class="demo-flag small" data-i18n="flag.demo">Demo</span></div>
+        <div class="risk-list" id="dispute-mix"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2 data-i18n="radar.logicTitle">Radar Logic — How Onset Is Predicted</h2></div>
+        <ul class="prose-list" id="radar-logic">
+          <li data-i18n="rlog.1"></li>
+          <li data-i18n="rlog.2"></li>
+          <li data-i18n="rlog.3"></li>
+          <li data-i18n="rlog.4"></li>
+          <li data-i18n="rlog.5"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB · RESEARCH HUB ================= -->
+<section id="tab-research" class="tabpanel" aria-label="Research Hub" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="research.title">Research Intelligence Hub</h1>
+        <p class="subtitle" data-i18n="research.subtitle">Search the demo research corpus — papers, policy briefs, government reports and case studies across the five demo states.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.demoDataset">Demo Dataset</span>
+    </div>
+
+    <div class="card">
+      <div class="research-controls">
+        <div class="ctl ctl-grow">
+          <label for="rs-q" data-i18n="research.search">Search</label>
+          <input id="rs-q" type="search" placeholder="e.g. “urban expansion”, “climate risk”, “stamp duty”" autocomplete="off" data-i18n-ph="research.searchPh" />
+        </div>
+        <div class="ctl"><label for="rs-state" data-i18n="research.state">State</label><select id="rs-state"><option value="" data-i18n="research.allStates">All states</option></select></div>
+        <div class="ctl"><label for="rs-year" data-i18n="research.year">Year</label><select id="rs-year"><option value="" data-i18n="research.allYears">All years</option></select></div>
+        <div class="ctl"><label for="rs-topic" data-i18n="research.topic">Topic</label><select id="rs-topic"><option value="" data-i18n="research.allTopics">All topics</option></select></div>
+        <div class="ctl"><label for="rs-type" data-i18n="research.type">Research Type</label><select id="rs-type"><option value="" data-i18n="research.allTypes">All types</option></select></div>
+      </div>
+      <p class="fineprint" id="rs-count"></p>
+    </div>
+
+    <div id="research-results" class="research-results"></div>
+    <div id="research-empty" class="card empty-state" hidden><p><span data-i18n="research.empty">No demo research matches those filters. Broaden the search or</span> <button class="btn btn-ghost" id="rs-clear" data-i18n="research.clear">clear filters</button>.</p></div>
+  </div>
+</section>
+
+<!-- ================= TAB · ASK BHUMIMITRA AI ================= -->
+<section id="tab-rag" class="tabpanel" aria-label="Ask BhumiMitra AI" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="ai.title">Ask BhumiMitra AI</h1>
+        <p class="subtitle" data-i18n="ai.subtitle">Geo-GraphRAG research copilot — natural-language queries across land-governance legislation, simulated judgments and spatial evidence, answered with structured citations.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.intent">Offline demo · Intent-based response engine</span>
+    </div>
+
+    <div class="card">
+      <div class="twin-search">
+        <label for="rag-input" class="sr-only">Research query</label>
+        <input id="rag-input" type="search" placeholder="e.g. What are the major land-use changes in Maharashtra?" autocomplete="off" data-i18n-ph="ai.ph" />
+        <button class="btn btn-primary" id="rag-search-btn" data-i18n="ai.ask">Ask BhumiMitra AI</button>
+      </div>
+      <div class="chip-row" id="rag-chips" aria-label="Example questions"></div>
+    </div>
+
+    <div id="rag-empty" class="card empty-state">
+      <p data-i18n="ai.empty">Ask a question or pick an example above. The demo response engine always returns a grounded answer with insights, datasets, research, policy documents and GIS-layer citations.</p>
+    </div>
+
+    <div id="rag-answer" hidden>
+      <div class="card answer-card">
+        <p class="answer-q" id="rag-q"></p>
+        <div class="thinking" id="rag-thinking" hidden>
+          <span class="spinner" aria-hidden="true"></span> <span data-i18n="ai.thinking">Traversing knowledge graph · linking entities · grounding claims…</span>
+        </div>
+        <div id="rag-body" hidden>
+          <h3><span data-i18n="ai.direct">Direct Answer</span> <span class="demo-flag small" data-i18n="ai.simResponse">Simulated AI Response</span></h3>
+          <p class="answer-text" id="rag-text"></p>
+          <div class="grid-2 answer-grid">
+            <div><h3 data-i18n="ai.insights">Key Insights</h3><ul class="prose-list" id="rag-insights"></ul></div>
+            <div><h3 data-i18n="ai.next">Suggested Next Actions</h3><ul class="prose-list" id="rag-next"></ul></div>
+            <div><h3 data-i18n="ai.datasets">Relevant Datasets</h3><ul class="prose-list" id="rag-datasets"></ul></div>
+            <div><h3 data-i18n="ai.research">Relevant Research</h3><ul class="prose-list" id="rag-research"></ul></div>
+            <div><h3 data-i18n="ai.policy">Policy Documents</h3><ul class="prose-list" id="rag-policy"></ul></div>
+            <div><h3 data-i18n="ai.layers">Related GIS Layers</h3><ul class="prose-list" id="rag-layers"></ul></div>
+          </div>
+          <p class="fineprint" data-i18n="ai.fineprint">Citations marked “demo/illustrative” reference document types, not verifiable official publications. No claim here is official Government of India statistics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAB · REPORTS ================= -->
+<section id="tab-reports" class="tabpanel" aria-label="Report Generator" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 data-i18n="reports.title">Policy Report Generator</h1>
+        <p class="subtitle" data-i18n="reports.subtitle">Assemble a demo policy report from the selected region, scenario, research evidence and GIS findings — then preview, print or download.</p>
+      </div>
+      <span class="demo-flag" data-i18n="flag.simulated">Simulated Report</span>
+    </div>
+
+    <div class="card">
+      <div class="research-controls">
+        <div class="ctl"><label for="rp-region" data-i18n="rp.region">Region</label><select id="rp-region"></select></div>
+        <div class="ctl"><label for="rp-scenario" data-i18n="rp.scenario">Policy Scenario</label><select id="rp-scenario">
+          <option value="agri-industrial" data-i18n="rp.scen.industrial">Agricultural → Industrial (500 ha, 5 yr)</option>
+          <option value="agri-protect" data-i18n="rp.scen.protect">Agricultural Protection (500 ha, 5 yr)</option>
+          <option value="agri-solar" data-i18n="rp.scen.solar">Agricultural → Solar Park (300 ha, 10 yr)</option>
+        </select></div>
+        <div class="ctl ctl-grow"><label for="rp-research" data-i18n="rp.research">Research Evidence</label><select id="rp-research"></select></div>
+        <div class="ctl"><label data-i18n="rp.findings">GIS Findings</label>
+          <div class="gis-findings">
+            <label class="layer-toggle"><input type="checkbox" id="rp-f-climate" checked /> <span data-i18n="rp.fClimate">Climate risk layer</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="rp-f-urban" checked /> <span data-i18n="rp.fUrban">Urban growth layer</span></label>
+            <label class="layer-toggle"><input type="checkbox" id="rp-f-disputes" /> <span data-i18n="rp.fDisputes">Dispute hotspots</span></label>
+          </div>
+        </div>
+        <div class="ctl ctl-buttons">
+          <button class="btn btn-primary" id="rp-generate" data-i18n="rp.generate">Generate Report</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="report-output" hidden>
+      <div class="card">
+        <div class="card-head">
+          <h2 data-i18n="rp.preview">Report Preview</h2>
+          <div class="radar-actions">
+            <button class="btn btn-ghost" id="rp-print" data-i18n="rp.print">Print / Save as PDF</button>
+            <button class="btn btn-primary" id="rp-download" data-i18n="rp.download">Download Demo Report</button>
+          </div>
+        </div>
+        <div id="report-preview" class="report-preview"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="app-footer">
+  <div class="wrap">
+    <p><strong>BhumiMitra</strong> <span data-i18n="foot.1">— Bharat Land Intelligence Ecosystem · SIH 2026 · PS ID 26019 · Aligned with DILRMP 3.0, InDEA 2.0, NDEAR &amp; DPDP Act 2023.</span></p>
+    <p class="fineprint" data-i18n="foot.2">DEMO MODE • Self-contained prototype. All figures, parcels, cases, research records and projections are simulated demo data and must not be cited as official statistics or real government records.</p>
+  </div>
+</footer>
+
+</div><!-- /app-shell -->
+
+<div id="modal-backdrop" class="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head"><h2 id="modal-title"></h2><button id="modal-close" class="modal-close" aria-label="Close dialog">✕</button></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/chart.umd.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n-mr.js"></script>
+<script src="i18n-hi.js"></script>
+<script src="content-i18n.js"></script>
+<script src="data.js"></script>
+<script src="data2.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

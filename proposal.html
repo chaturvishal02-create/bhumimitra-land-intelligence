@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BhumiMitra — Bharat Land Intelligence Ecosystem | SIH 2026</title>
+<meta name="description" content="BhumiMitra: National Digital Platform for Research, Policy Innovation and Evidence-Based Land Governance. Smart India Hackathon 2026, Problem Statement 26019, DoLR / Ministry of Rural Development." />
+<link rel="stylesheet" href="proposal.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">भू</span>
+      <span class="brand-text"><strong>BhumiMitra</strong><small>Bharat Land Intelligence Ecosystem</small></span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#vision">Vision</a>
+      <a href="#scope">Scope</a>
+      <a href="#tech">Technology</a>
+      <a href="#features">Killer Features</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#demo">Live Demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Smart India Hackathon 2026 · Problem Statement ID 26019 · DoLR, Ministry of Rural Development</p>
+    <h1>India digitized its land.<br /><em>Now let it think.</em></h1>
+    <p class="lede">
+      BhumiMitra is the analytical layer DILRMP 3.0 (2026–2031) has been waiting for — a national
+      Digital Public Infrastructure platform that transforms static land records into a
+      <strong>Territorial Digital Twin</strong>, where every parcel has a biography, a health profile,
+      a social network and predictive futures.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#demo">Explore the Parcel Twin demo</a>
+      <a class="btn btn-ghost" href="#vision">Read the proposal</a>
+    </div>
+    <dl class="statbar" aria-label="India land digitization status">
+      <div><dt>99.8%+</dt><dd>Records of Rights computerized</dd></div>
+      <div><dt>40 Cr+</dt><dd>parcels with 14-digit Bhu-Aadhaar (ULPIN)</dd></div>
+      <div><dt>95%+</dt><dd>Sub-Registrar Offices on NGDRS</dd></div>
+      <div><dt>94%+</dt><dd>Revenue courts computerized (RCCMS)</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ VISION ============ -->
+<section id="vision" class="section">
+  <div class="wrap">
+    <p class="kicker">Chapter 1 · Core Innovation Philosophy</p>
+    <h2>The Territorial Digital Twin paradigm</h2>
+    <p class="section-lede">
+      A land parcel is not a row in a table. BhumiMitra treats every ULPIN as a living entity with
+      four attributes of life — each grounded in an authoritative national dataset.
+    </p>
+    <div class="grid grid-4">
+      <article class="card">
+        <h3>📜 Biography</h3>
+        <p>A life story: 50+ years of mutations, deeds, partitions and litigations fused from RoR, NGDRS and RCCMS via the ULPIN join key.</p>
+      </article>
+      <article class="card">
+        <h3>🩺 Health Profile</h3>
+        <p>A medical chart: soil organic carbon, water-table trend, salinity and climate vulnerability from Bhuvan, AgriStack and Soil Health Cards.</p>
+      </article>
+      <article class="card">
+        <h3>🕸 Social Network</h3>
+        <p>A family &amp; neighbourhood graph: adjacent parcels, master-plan zones, infrastructure buffers and watersheds — queryable in GeoSPARQL.</p>
+      </article>
+      <article class="card">
+        <h3>🔮 Predictive Futures</h3>
+        <p>A prognosis: agent-based counterfactual simulations of policy shocks — stamp duty changes, ceiling revisions, corridor acquisitions.</p>
+      </article>
+    </div>
+
+    <h3 class="subhead">Who it serves — and what they get Monday morning</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Beneficiary</th><th>Monday-morning utility</th></tr></thead>
+        <tbody>
+          <tr><td>District Collector</td><td>Dispute Early Warning Radar flags 3 taluks for a litigation surge → preventive mediation camps scheduled before the next revenue <em>adalat</em> cycle.</td></tr>
+          <tr><td>Policy planner (NITI Aayog / MoRD)</td><td>“What happens to fragmentation and stamp-duty yield in Pune if we cut agri stamp duty 15%?” — answered in minutes, not a 6-month consultant study.</td></tr>
+          <tr><td>Academic researcher</td><td>Geo-GraphRAG answers multilingual queries across 28 state portals with reproducible citations; JupyterHub labs with differential-privacy guarantees.</td></tr>
+          <tr><td>Agricultural economist</td><td>Parcel-level crop-switching elasticity joined to NGDRS transaction prices — a panel dataset that once required two years of RTIs.</td></tr>
+          <tr><td>Climate scientist</td><td>Parcel Vulnerability Index time-series at 10 m resolution, fused with IMD and Bhuvan climate projections.</td></tr>
+          <tr><td>Financial institutions</td><td>ULPIN-keyed collateral risk score: title cleanliness + climate exposure + litigation probability.</td></tr>
+          <tr><td>Rural citizen</td><td>WhatsApp/USSD parcel-biography summary in their own language, with a DigiLocker-consented view of their holding's health report.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCOPE ============ -->
+<section id="scope" class="section section-alt">
+  <div class="wrap">
+    <p class="kicker">Chapter 2 · Scope of Study</p>
+    <h2>Twelve operational domains</h2>
+    <div class="table-scroll">
+      <table class="numbered">
+        <thead><tr><th>S.No.</th><th>Scope Area</th><th>Detailed Operational Description</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Centralized Research Repository &amp; Spatial Knowledge Mesh</td><td>Federated harvest layer: CKAN-based national catalog indexed by ULPIN-prefix geography. Authoritative data stays at source nodes; BhumiMitra stores derived indices, metadata and embeddings, each with a Hyperledger Fabric provenance hash.</td></tr>
+          <tr><td>2</td><td>AI-Powered Multilingual Research Intelligence (Geo-GraphRAG)</td><td>RAG grounded in a spatial knowledge graph: IndicBERT-v2 + IndiaAI IndicLLM query understanding in 22 scheduled languages, GeoSPARQL graph traversal, per-claim citations back to authoritative records. Handles code-mixed queries.</td></tr>
+          <tr><td>3</td><td>Territorial Digital Twin Engine (ULPIN-Centered 4D Modeling)</td><td>OGC-compliant 4D cadastre runtime: versioned layer stack per ULPIN with temporal geometry playback (T-GeoJSON). Twin state machine: Clean → Watch → Stressed → Disputed → Resolved.</td></tr>
+          <tr><td>4</td><td>Policy Counterfactual Simulator &amp; Agent-Based Modeling Lab</td><td>Mesa/GAMA agent populations calibrated from real transaction distributions; policy shocks propagated through behavioral rules; 10-year probabilistic projections of fragmentation, speculative churn and tax yield with sensitivity analysis.</td></tr>
+          <tr><td>5</td><td>Interactive GIS Analytics &amp; Urban-Rural Boundary Monitoring</td><td>Browser workbench over GeoServer WMS/WFS/WMTS; Sentinel-2 change detection auto-flags agri-to-urban transitions, encroachment on commons and peri-urban sprawl velocity; buffer/overlay analysis as REST endpoints.</td></tr>
+          <tr><td>6</td><td>Collaborative Virtual Labs &amp; Reproducibility Vault</td><td>Multi-tenant JupyterHub with geospatial kernels; every published result captured as a Docker digest + data snapshot + code hash + seed — a DOI-linked, citable “research capsule.”</td></tr>
+          <tr><td>7</td><td>Empirical Policy Evaluation Framework</td><td>Built-in quasi-experimental toolkit: Difference-in-Differences, Regression Discontinuity, Synthetic Control, event studies (EconML/DoWhy). Results feed back into simulator calibration — a closed evidence loop.</td></tr>
+          <tr><td>8</td><td>Climate-Land Nexus Intelligence &amp; Parcel Vulnerability Indexing</td><td>PVI = weighted composite of groundwater decline (CGWB), soil degradation (SHC deltas), flood/drought exposure (Bhuvan + IMD) and cropping stress (GEE NDVI anomalies). Published per ULPIN annually.</td></tr>
+          <tr><td>9</td><td>Land Dispute Analytics &amp; Predictive Case Resolution</td><td>Survival analysis (Cox PH + gradient boosting) on RCCMS lifecycles; predicted months-to-disposal, taluk litigation-surge heat maps, and identification of systemic dispute generators for structural reform.</td></tr>
+          <tr><td>10</td><td>Open Innovation, Research Grants &amp; Sandbox Management</td><td>Grants lifecycle, a regulated sandbox for land-fintech products against synthetic-but-realistic parcel data, and tiered CKAN open-data access (public → registered → vetted researcher).</td></tr>
+          <tr><td>11</td><td>Federated Interoperability &amp; DPDP Act 2023 Consent Architecture</td><td>Bharat Land Stack gateway (REST/JSON-LD + OGC API); every cross-node call carries a verifiable consent artifact; ε-budgeted differential privacy with a k≥11 anonymity floor on all micro-level queries.</td></tr>
+          <tr><td>12</td><td>Global South DPI Knowledge Exchange</td><td>Containerized “BhumiMitra Lite” (open ontology + simulator core, no sovereign data) for African Union and ASEAN partners; joint cadastre-ontology standards track with OGC/FIG.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features" class="section">
+  <div class="wrap">
+    <p class="kicker">Chapter 5 · Deep-Dive</p>
+    <h2>Three groundbreaking features</h2>
+    <p class="section-lede">Capabilities no conventional land portal offers — from 8-second parcel biographies to quantified policy counterfactuals to predictive dispute prevention.</p>
+
+    <article class="feature">
+      <div class="feature-num">01</div>
+      <div class="feature-body">
+        <h3>Parcel Biography Engine</h3>
+        <p><strong>What it does:</strong> Enter any ULPIN and receive the parcel's complete 50-year chronological story in ~8 seconds — a task that takes researchers three weeks of fieldwork and RTIs.</p>
+        <ul>
+          <li><strong>Federated fetch:</strong> MCP agents pull RoR mutations, NGDRS deeds, RCCMS cases, AgriStack crop series and Bhuvan imagery in parallel.</li>
+          <li><strong>Entity resolution:</strong> IndicBERT NER links vernacular names across Devanagari, Tamil and Bengali deed text via fuzzy gazetteer matching.</li>
+          <li><strong>Bitemporal fusion:</strong> source disagreements are conflict-flagged — a mutation date preceding its deed date is itself a dispute signal.</li>
+          <li><strong>Zero-hallucination narrative:</strong> IndicLLM synthesis where every sentence carries a provenance citation anchored on Hyperledger Fabric.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-num">02</div>
+      <div class="feature-body">
+        <h3>Policy Counterfactual Simulator</h3>
+        <p><strong>What it does:</strong> Answers “what if” policy questions with quantified, contestable, reproducible projections instead of ideology.</p>
+        <ul>
+          <li><strong>Agent-based core:</strong> Mesa/GAMA agents (farmers, developers, speculators, tenants, inspectors) calibrated from real NGDRS transaction distributions.</li>
+          <li><strong>Worked scenario:</strong> a 15% agri stamp-duty cut in Pune district → transaction volume +23% [CI 18–29%], mean holding size −0.11 ha, short-run revenue −₹38 Cr/yr recovering to +₹12 Cr/yr by year 7, benami transfers ↓31%, and a 14-village speculative hot-spot map flagged for circle-rate revision.</li>
+          <li><strong>Earned trust:</strong> 1,000-member Monte Carlo ensembles, Sobol sensitivity indices, and mandatory back-testing against five historical natural experiments before any ministry may cite it.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-num">03</div>
+      <div class="feature-body">
+        <h3>Dispute Early Warning Radar</h3>
+        <p><strong>What it does:</strong> Converts firefighting into prevention — and prevention into structural reform intelligence.</p>
+        <ul>
+          <li><strong>Predictive model:</strong> gradient-boosted survival analysis over RCCMS lifecycles using resurvey boundary mismatches, unregistered-inheritance flags, fragmentation depth and corridor proximity (target AUC ≥ 0.82).</li>
+          <li><strong>Operational output:</strong> monthly taluk-level litigation-surge heat maps pushed to Collectors, with costed preventive mediation-camp proposals.</li>
+          <li><strong>Systemic mode:</strong> clusters disputes by root-cause signature — e.g. “72% of this taluk's surge traces to a single 2019 mutation-workflow defect” — handed to DoLR as reform evidence.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section id="architecture" class="section section-alt">
+  <div class="wrap">
+    <p class="kicker">Chapter 4 · Architectural Innovation</p>
+    <h2>Seven layers, federated by design</h2>
+    <p class="section-lede">
+      BhumiMitra will not ask 28 states to surrender their data — that proposal always dies.
+      Data stays at authoritative nodes; SPARQL and OGC API endpoints wrapped in MCP agents
+      federate at query time. Only non-personal derivatives centralize.
+    </p>
+
+    <div class="layers" role="list" aria-label="Seven-layer architecture, top to bottom">
+      <div class="layer" role="listitem"><span class="layer-id">L1</span><div><strong>Citizen, Researcher &amp; Decision-Maker Interface</strong><small>Web workbench · PWA · WhatsApp/USSD · Superset dashboards</small></div></div>
+      <div class="layer" role="listitem"><span class="layer-id">L2</span><div><strong>AI Intelligence &amp; Geo-GraphRAG Layer</strong><small>IndicLLM · IndicBERT NER · graph-grounded RAG · causal engine</small></div></div>
+      <div class="layer" role="listitem"><span class="layer-id">L3</span><div><strong>Territorial Digital Twin Core</strong><small>4D cadastre runtime · PVI engine · ABM simulator · biography engine</small></div></div>
+      <div class="layer" role="listitem"><span class="layer-id">L4</span><div><strong>Federated Knowledge Graph &amp; Ontology Mesh</strong><small>LandOnto-IN (LADM/OWL) · Jena GeoSPARQL · Neo4j adjacency</small></div></div>
+      <div class="layer" role="listitem"><span class="layer-id">L5</span><div><strong>Bharat Land Stack Interoperability Gateway</strong><small>Kong · OGC API-Features/EDR · JSON-LD · MCP node agents</small></div></div>
+      <div class="layer" role="listitem"><span class="layer-id">L6</span><div><strong>Federated Authoritative Source Nodes</strong><small>State RoR portals · NGDRS · RCCMS · Bhuvan · SVAMITVA/NAKSHA · AgriStack · CGWB</small></div></div>
+      <div class="layer layer-cross" role="listitem"><span class="layer-id">L7</span><div><strong>Zero-Trust Security, Governance &amp; DPDP Compliance</strong><small>Keycloak OIDC · Consent Manager · differential-privacy budget · Fabric provenance · full audit trail</small></div></div>
+    </div>
+
+    <div class="grid grid-2 arch-notes">
+      <div class="card">
+        <h3>ULPIN — the universal join key</h3>
+        <p>
+          The 14-digit Bhu-Aadhaar becomes the primary spatial foreign key across previously
+          unjoinable domains: <code>ULPIN ⋈ NGDRS(deed) ⋈ RCCMS(case) ⋈ AgriStack(crop) ⋈ SHC(soil)
+          ⋈ CGWB(water) ⋈ MasterPlan(zone)</code>. Deterministic joins where ULPIN exists,
+          spatial-join fallback (ST_Intersects) with confidence scores for legacy records, and
+          temporal validity windows on every edge — India's first national bitemporal land panel dataset.
+        </p>
+      </div>
+      <div class="card">
+        <h3>DPDP Act 2023 by construction</h3>
+        <p>
+          Consent artifacts are verified at the gateway — absent consent is a 403, logged on-chain.
+          Micro-data queries pass an ε-budget accountant (ε=1.0 per researcher-quarter, Gaussian
+          mechanism) with a k≥11 anonymity floor and geometry generalization. Privacy degrades
+          gracefully into governed access; it never silently vanishes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH ============ -->
+<section id="tech" class="section">
+  <div class="wrap">
+    <p class="kicker">Chapter 3 · Component-Wise Technology</p>
+    <h2>Concrete stack, FOSS-first, sovereign-hosted</h2>
+    <div class="table-scroll">
+      <table class="numbered">
+        <thead><tr><th>S.No.</th><th>Component</th><th>Recommended Stack &amp; Justification</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Frontend &amp; Visual Interface</td><td><strong>React 19, Next.js 15, Tailwind CSS, shadcn/ui</strong> — Server Components cut bundle size for low-bandwidth district offices; WCAG 2.1 AA + GIGW 3.0 compliance.</td></tr>
+          <tr><td>2</td><td>Geospatial Visualization &amp; 3D Terrain</td><td><strong>CesiumJS, OpenLayers 10, GeoServer 2.26, PostGIS 3.5</strong> — CesiumJS renders SVAMITVA drone meshes natively; GeoServer/PostGIS are the de-facto NIC GI Cloud standard.</td></tr>
+          <tr><td>3</td><td>Microservices &amp; API Gateway</td><td><strong>FastAPI, Go 1.23, GraphQL Federation, gRPC, Kong</strong> — Python owns the geo/AI ecosystem; Go handles 40 Cr-parcel fan-out; Kong provides the zero-trust DPDP-audited edge.</td></tr>
+          <tr><td>4</td><td>Federated Spatial Knowledge Graph</td><td><strong>Apache Jena (GeoSPARQL), Neo4j, RDF/OWL, LandOnto-IN aligned to LADM ISO 19152</strong> — LADM guarantees international interoperability; Neo4j gives millisecond adjacency traversal for the simulator.</td></tr>
+          <tr><td>5</td><td>AI / NLP &amp; LLM Stack</td><td><strong>IndiaAI IndicLLM, IndicBERT-v2, self-hosted Llama-3-70B, LangChain, custom Geo-GraphRAG</strong> — sovereign models satisfy data residency; self-hosting keeps landholder PII away from third-party APIs (DPDP §8).</td></tr>
+          <tr><td>6</td><td>Policy Simulation &amp; ABM</td><td><strong>Mesa 3.x, GAMA 1.9, Ray 2.x + RLlib, Polars</strong> — Ray parallelizes 1,000-scenario Monte Carlo ensembles overnight on GI Cloud burst capacity.</td></tr>
+          <tr><td>7</td><td>Satellite &amp; Remote Sensing Ingestion</td><td><strong>ISRO Bhuvan APIs, Google Earth Engine, Sentinel Hub, GDAL 3.9 / Rasterio / STAC, Airflow</strong> — GEE eliminates petabyte-scale egress; Bhuvan keeps sovereign imagery in-country.</td></tr>
+          <tr><td>8</td><td>Primary &amp; Analytical Storage</td><td><strong>PostgreSQL 16 + PostGIS, ClickHouse, Parquet/Iceberg on MinIO, Redis 7</strong> — Iceberg ACID snapshots power the Reproducibility Vault; ClickHouse makes district-wide PVI aggregation sub-second.</td></tr>
+          <tr><td>9</td><td>Territorial Digital Twin Management</td><td><strong>Custom OGC-compliant 4D cadastre runtime (Go), T-GeoJSON, LADM, TimescaleDB, OGC API-Features Part 2</strong> — standardized temporal queries over parcel history, no proprietary dead-end.</td></tr>
+          <tr><td>10</td><td>Immutable Audit &amp; Provenance Ledger</td><td><strong>Hyperledger Fabric 2.5</strong> — permissioned channels match inter-government trust topology; every result, consent event and simulation run is hash-anchored.</td></tr>
+          <tr><td>11</td><td>Identity, Access &amp; Compliance</td><td><strong>Aadhaar eKYC, DigiLocker OAuth 2.0, Keycloak, W3C Verifiable Credentials</strong> — VCs let a vetted-researcher credential verify statelessly at any node: federated access without federated user databases.</td></tr>
+          <tr><td>12</td><td>Collaborative Compute &amp; Reproducibility</td><td><strong>JupyterHub 5 + KubeSpawner, Docker snapshots, MLflow, Papermill, Zenodo DOI minting</strong> — links every experiment to exact code + data + seed.</td></tr>
+          <tr><td>13</td><td>Dashboard Studio &amp; Reporting</td><td><strong>Apache Superset, Grafana, Observable Plot, WeasyPrint</strong> — Superset row-level security enforces the DPDP query budget at the visualization layer.</td></tr>
+          <tr><td>14</td><td>Citizen &amp; Participatory Layer</td><td><strong>Offline-first PWA, WhatsApp Business API, USSD gateway, 22-language IVR</strong> — tri-channel inclusion guarantees “no citizen left offline” (NDEAR).</td></tr>
+          <tr><td>15</td><td>DevOps, Orchestration &amp; Hosting</td><td><strong>Kubernetes on MeitY GI Cloud / NIC MeghRaj, Terraform, ArgoCD, Prometheus + Loki, OpenTelemetry</strong> — GitOps makes the platform rebuildable from source, a DPI requirement for state adoption.</td></tr>
+          <tr><td>16</td><td>Automated Testing &amp; Validation</td><td><strong>Pytest + Hypothesis, Locust, Great Expectations, OGC CITE suites</strong> — data contracts reject schema-drifted state feeds before they poison the twin.</td></tr>
+          <tr><td>17</td><td>Innovation Sandbox &amp; Hackathon Infra</td><td><strong>CKAN 2.11, BinderHub + repo2docker, differentially-private synthetic parcel generator</strong> — sandbox startups build without touching real PII (DPDP §8(4) by design).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTEGRATION ============ -->
+<section id="integration" class="section section-alt">
+  <div class="wrap">
+    <p class="kicker">Chapter 6 · Integration Blueprint</p>
+    <h2>Federated with the government ecosystem</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Source System</th><th>Data Consumed</th><th>Protocol &amp; Cadence</th><th>Governance Mode</th></tr></thead>
+        <tbody>
+          <tr><td>Bhu-Naksha / Land Stack</td><td>Cadastral boundaries, spatial mutations, ULPIN seed</td><td>OGC API-Features, WMS/WFS, JSON-LD · nightly delta</td><td>Node agent at NIC; center caches geometry only</td></tr>
+          <tr><td>NGDRS</td><td>Sale deeds, valuations, stamp-duty collections, ECs</td><td>REST/JSON adapters + registration webhooks · daily</td><td>Buyer/seller PII never centralized; ULPIN-keyed aggregates only</td></tr>
+          <tr><td>RCCMS</td><td>Case status, injunctions, disputed-title flags</td><td>SPARQL at High Court nodes · weekly</td><td>Court-node sovereign; survival features stored, not case PII</td></tr>
+          <tr><td>SVAMITVA / NAKSHA</td><td>Drone orthoimagery, 3D meshes, DEM, urban cards</td><td>Cesium 3D Tiles + STAC on Bhuvan · per survey batch</td><td>Served from Bhuvan; zero duplication</td></tr>
+          <tr><td>ISRO Bhuvan</td><td>LULC, hazard layers, composites</td><td>WMS/WCS/WMTS · monthly</td><td>Direct OGC federation — India's reference GI node</td></tr>
+          <tr><td>PM-KISAN / AgriStack / SHC</td><td>Beneficiary overlays, crop sown, soil NPK/OC</td><td>Federated APIs · seasonal (Kharif/Rabi)</td><td>Consent-gated; ε-DP aggregates for research</td></tr>
+          <tr><td>State portals (Bhoomi, MeeBhoomi, Banglarbhumi, Dharani, AnyROR…)</td><td>RoR, mutation registers, khasra geometry</td><td>FOSS adapter SDK + MCP node agent · nightly</td><td>States retain custody; the SDK removes per-state integration cost</td></tr>
+          <tr><td>CGWB / IMD</td><td>Groundwater levels, climate normals</td><td>API → ClickHouse ETL · quarterly/daily</td><td>Open data, no consent needed</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      Every feed passes Great Expectations data contracts — schema, OGC geometry validity, ULPIN checksum,
+      temporal monotonicity — before entering the twin. Integration becomes an engineering SLA, not a political negotiation.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap" class="section">
+  <div class="wrap">
+    <p class="kicker">Chapter 8 · Implementation</p>
+    <h2>Five-year roadmap aligned to DILRMP 3.0 (2026–2031)</h2>
+    <ol class="timeline">
+      <li>
+        <span class="phase">Phase 1 · Months 1–12</span>
+        <h3>Foundation</h3>
+        <p>Land Stack connectors for 5 anchor states + NGDRS + Bhuvan; LandOnto-IN v1 (LADM-aligned); ULPIN join spine over 10 Cr parcels; multilingual Geo-GraphRAG search GA on GI Cloud.</p>
+        <p class="exit"><strong>Exit gate:</strong> 5 federated nodes · search &lt; 2 s · 100% feeds under data contracts · OGC CITE certification.</p>
+      </li>
+      <li>
+        <span class="phase">Phase 2 · Months 13–24</span>
+        <h3>Twin Pilot</h3>
+        <p>Territorial Digital Twin across 3 representative states; Parcel Biography Engine GA; Virtual Labs + Reproducibility Vault; PVI v1 nationwide.</p>
+        <p class="exit"><strong>Exit gate:</strong> &gt;95% parcel coverage in pilot states · biography &lt; 10 s · 500 researchers · 50 DOI-minted capsules.</p>
+      </li>
+      <li>
+        <span class="phase">Phase 3 · Months 25–36</span>
+        <h3>Intelligence</h3>
+        <p>Policy Counterfactual Simulator back-tested on 5 natural experiments; Dispute Early Warning Radar in 15 states; Climate-Land Nexus module; causal-evaluation framework GA.</p>
+        <p class="exit"><strong>Exit gate:</strong> retrodiction MAPE &lt; 15% · radar AUC ≥ 0.80 · 100 mediation-camp interventions triggered.</p>
+      </li>
+      <li>
+        <span class="phase">Phase 4 · Months 37–48</span>
+        <h3>Pan-India Scale</h3>
+        <p>All 28 states + 8 UTs federated; citizen ground-truthing live in 22 languages; Open Innovation Sandbox and grants; bank/FI collateral-score API.</p>
+        <p class="exit"><strong>Exit gate:</strong> 40 Cr ULPIN twins · 1 M+ citizen interactions · 30 sandbox projects · ≥80% state adoption of adapter SDK.</p>
+      </li>
+      <li>
+        <span class="phase">Phase 5 · Months 49–60</span>
+        <h3>Global South &amp; Autonomy</h3>
+        <p>AU + ASEAN deployments of BhumiMitra Lite; autonomous AI foresight alerts; institutional transition to NIC/NCESS hosting with ≥60% self-funded opex.</p>
+        <p class="exit"><strong>Exit gate:</strong> 4 international deployments · foresight precision ≥ 70% · OGC/FIG standards contribution accepted.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ IMPACT ============ -->
+<section id="impact" class="section section-alt">
+  <div class="wrap">
+    <p class="kicker">Chapter 9 · Impact</p>
+    <h2>Measurable KPIs</h2>
+    <div class="grid grid-3">
+      <div class="card kpi"><span class="kpi-val">8 s</span><p>Parcel biography generation vs 3 weeks of fieldwork + RTIs</p></div>
+      <div class="card kpi"><span class="kpi-val">≥ 0.82</span><p>Dispute-onset prediction AUC on 12-month forward window</p></div>
+      <div class="card kpi"><span class="kpi-val">40 Cr</span><p>ULPIN-keyed digital twins at full pan-India scale</p></div>
+      <div class="card kpi"><span class="kpi-val">&lt; 15%</span><p>Simulator retrodiction MAPE against historical episodes</p></div>
+      <div class="card kpi"><span class="kpi-val">22</span><p>Scheduled languages across search, chatbot and IVR channels</p></div>
+      <div class="card kpi"><span class="kpi-val">ε = 1.0</span><p>Differential-privacy budget per researcher-quarter, k ≥ 11 floor</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section id="demo" class="section">
+  <div class="wrap">
+    <p class="kicker">Prototype · Chapter 9 code, running</p>
+    <h2>Parcel Twin — interactive demo</h2>
+    <p class="note">
+      This is a front-end prototype of the <code>/api/v1/parcel/{ulpin}/biography</code> experience,
+      driven by <strong>illustrative local sample data</strong> — not a live government feed.
+      Try ULPIN <code>27PUNEHV110042</code>, or press “Load sample parcel.”
+    </p>
+
+    <form id="twin-form" class="twin-form" novalidate>
+      <label for="ulpin-input" class="sr-only">Enter 14-digit ULPIN</label>
+      <input id="ulpin-input" type="text" inputmode="text" maxlength="14"
+             placeholder="Enter 14-digit ULPIN (e.g. 27PUNEHV110042)" autocomplete="off" />
+      <button type="submit" class="btn btn-primary" id="twin-btn">Open Twin</button>
+      <button type="button" class="btn btn-ghost" id="sample-btn">Load sample parcel</button>
+    </form>
+    <p id="twin-error" class="twin-error" role="alert" hidden></p>
+
+    <div id="twin-result" class="twin-result" hidden>
+      <header class="twin-head">
+        <div>
+          <p class="twin-eyebrow">Territorial Digital Twin</p>
+          <p class="twin-ulpin" id="twin-ulpin"></p>
+          <p class="twin-narrative" id="twin-narrative"></p>
+        </div>
+        <span class="twin-state" id="twin-state"></span>
+      </header>
+
+      <div class="grid grid-4 twin-metrics">
+        <div class="metric"><span class="metric-label">Health · Soil Index</span><span class="metric-val" id="m-soil"></span><div class="bar"><i id="b-soil"></i></div></div>
+        <div class="metric"><span class="metric-label">Water Stress</span><span class="metric-val" id="m-water"></span><div class="bar"><i id="b-water"></i></div></div>
+        <div class="metric"><span class="metric-label">Climate Vulnerability</span><span class="metric-val" id="m-climate"></span><div class="bar"><i id="b-climate"></i></div></div>
+        <div class="metric"><span class="metric-label">Dispute Risk</span><span class="metric-val" id="m-risk"></span><div class="bar"><i id="b-risk"></i></div></div>
+      </div>
+
+      <div class="twin-alert" id="twin-alert" hidden></div>
+
+      <div class="twin-sim">
+        <div class="twin-sim-head">
+          <h3>Policy Counterfactual — Agricultural Stamp Duty Cut</h3>
+          <span class="twin-sim-val" id="sim-val">−0%</span>
+        </div>
+        <input type="range" id="sim-slider" min="0" max="30" value="0" step="1"
+               aria-label="Stamp duty reduction percent" />
+        <p class="twin-sim-out" id="sim-out"></p>
+      </div>
+
+      <h3 class="subhead">Biography timeline</h3>
+      <ol class="twin-timeline" id="twin-timeline"></ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>BhumiMitra — Bharat Land Intelligence Ecosystem</strong></p>
+    <p>Every parcel remembered. Every policy tested. Every dispute foreseen.</p>
+    <p class="footer-meta">SIH 2026 · PS ID 26019 · Aligned with DILRMP 3.0, InDEA 2.0, NDEAR &amp; DPDP Act 2023 · Concept proposal site with illustrative sample data.</p>
+  </div>
+</footer>
+
+<script src="proposal.js"></script>
+</body>
+</html>
